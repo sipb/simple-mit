@@ -1,0 +1,220 @@
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>SIMPLE: a Super Intuitive Method of Programmatically Listing Emails</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <div class="info">
+            <h1>SIMPLE</h1>
+            <h3>a Super Intuitive Method of Programmatically Listing Emails</h3>
+            <h4>by kyc, michaelx, &amp; runpeng</h4>
+
+            <hr>
+
+            <h3>Want to send to a mailing list but exclude someone?</h3>
+
+            <p>Now, for the next birthday email or surprise party,
+            just do one of the following:</p>
+
+            <ul>
+                <li><addr>{safetythird}-{michaelx}@simple.mit.edu: </addr> send to everyone in safetythird except michaelx.</li>
+                <li><addr>safetythird--kyc2915@simple.mit.edu: </addr> note that without curly braces, you need two minus signs!</li>
+                <li><addr>safetythird-minus-dyhwong@simple.mit.edu: </addr> the verbose way.</li>
+                <li><addr>{safetythird}-{dyhwong}.mitonly@simple.mit.edu: </addr> don't worry about inadvertently sending to an alternate Gmail on the list and ruining the surprise -- filter for '@mit' addresses only!</li>
+            </ul>
+
+            <p><b>Important:</b> you must address your email to <b><i>simple.mit.edu</i></b>, not mit.edu.</p>
+
+            <p>You can use this syntax for both a list minus a kerberos, as well as a list minus another list.
+            You can even exclude multiple email addresses and lists!</p>
+
+            <p>But wait! SIMPLE can do more. Keep reading to find out what else you can do with SIMPLE.</p>
+
+            <hr>
+
+            <h3>Syntax Details</h3>
+
+            <p>Currently three operations are supported: minus (-), plus (+) and intersect (&amp;). An
+            example for syntax is best shown with a table:
+
+            <table>
+                <tr>
+                    <th></th>
+                    <th>Braces notation</th>
+                    <th>Quick notation</th>
+                    <th>Verbose notation</th>
+                </tr>
+                <tr>
+                    <td>minus (everyone except Tom Riddle): </td>
+                    <td><addr>{safetythird}-{tomriddle}@simple.mit.edu</addr></td>
+                    <td><addr>safetythird--tomriddle@simple.mit.edu</addr></td>
+                    <td><addr>safetythird-minus-tomriddle@simple.mit.edu</addr></td>
+                </tr>
+                <tr>
+                    <td>plus (BC and Next): </td>
+                    <td><addr>{bc-talk}+{next-forum}@simple.mit.edu</addr></td>
+                    <td><addr>bc-talk++next-forum@simple.mit.edu</addr></td>
+                    <td><addr>bc-talk-plus-next-forum@simple.mit.edu</addr></td>
+                </tr>
+                <tr>
+                    <td>intersect (safetythird 2017s): </td>
+                    <td><addr>{safetythird}&amp;{mit2017}@simple.mit.edu</addr></td>
+                    <td><addr>safetythird&amp;&amp;mit2017@simple.mit.edu</addr></td>
+                    <td><addr>safetythird-intersect-mit2017@simple.mit.edu</addr></td>
+                </tr>
+            </table>
+
+            <p>You can chain operations together, and they will be evaluated from left to right. For
+            example, <addr>safetythird--tomriddle++bc-talk&&mit2017@simple.mit.edu</addr> will take the
+            members of safetythird, remove Tom Riddle, add everyone from BC, and finally from those
+            emails filter out only the members of the class of 2017.</p>
+
+            <p>The braces notation also supports nested expressions. For example,
+            <addr>{safetythird}-{{{tomriddle}+{bc-talk}}&mit2017}@simple.mit.edu</addr> will first take
+            Tom Riddle, add the members of bc-talk, and from those take only the members of mit2017.
+            Then your email will be sent to everyone in safetythird not in that list.</p>
+
+            <hr>
+
+            <h3>Dry Runs</h3>
+
+            <p>You may be unsure about whether a given email will actually be parsed in the same way
+            that you think it will. If you have doubts, you can always submit a <i>dry run</i> email
+            to SIMPLE containing the email that you want to test. Just append '.dryrun' to the end of
+            the email, before the '@' sign:</p>
+
+            <ul>
+                <li>
+                <p>send to <addr>{safetythird}-{michaelx}.dryrun@simple.mit.edu</addr></p>
+                </li>
+            </ul>
+
+            <p>The above email will send you a message specifying how SIMPLE will parse the email,
+            without actually sending the email to anyone.</p>
+
+            <hr>
+
+            <h3>FAQ</h3>
+
+            <ul>
+                <li>
+                <h4>Can I just type <b>@mit.edu</b>, instead of <b>@simple.mit.edu</b>?</h4>
+                <p>Sorry, we run a separate email server that parses the emails, so you must
+                go through SIMPLE.</p>
+                </li>
+                <li>
+                <h4>My emails didn't send to anyone.</h4>
+                <p>You can first try to submit a dry run email to see if the SIMPLE server is
+                running correctly. Also, verify that you did not receive an error message
+                email, possibly in your spam folder.</p>
+                </li>
+                <li>
+                <h4>Can I exclude multiple people?</h4>
+                <p>Yes, just send to something of the form <addr>{list}-{user1}-{user2}@simple.mit.edu</addr>.</p>
+                </li>
+                <li>
+                <h4> My stealthy friend has their non-MIT (e.g. Gmail) address on a mailing list. How can I still exclude them?</h4>
+                <p>Fear not! Just append '.mitonly' to the end of the email address, before the '@' sign. For example, sending to <addr>{safetythird}-{dyhwong}.mitonly@simple.mit.edu</addr> will send only to valid '@mit' addresses on safetythird, except 'dyhwong@mit.edu'</p>
+                <h4>Can I put SIMPLE emails in mailing lists?</h4>
+                <p>Absolutely. However, MIT's mailing list server does not seem to handle the curly braces in
+                <addr>{list}-{user}@simple.mit.edu</addr> correctly, so please use either quick
+                notation (<addr>list--user@simple.mit.edu</addr>) or verbose notation
+                (<addr>list-minus-user@simple.mit.edu</addr>) instead when using SIMPLE emails in mailing lists.</p>
+                </li>
+                <li>
+                <h4>Can I cc or bcc a SIMPLE email?</h4>
+                <p>Yes, a SIMPLE email is just like a normal email address.</p>
+                </li>
+                <li>
+                <h4>Can I send to a hidden list?</h4>
+                <p>Yes, provided you have the permissions to view the members of the list. If so, send your email
+                as you normally would, through SIMPLE. SIMPLE will then send you an activation link, which will
+                ask you to login through Webathena and complete the sending process.</p>
+                </li>
+                <li>
+                <h4>I have a question that is not on this list.</h4>
+                <p>Please ask us at <addr>admin@simple.mit.edu</addr>.</p>
+                </li>
+            </ul>
+
+            <hr>
+
+            <h3>Feature Requests / Bug Fixes</h3>
+
+            <ul>
+                <li>
+                <p><i>4/27/2017:</i> Fixed a bug where dryrun results for using the '.mitonly' flag were not accurate.</p> 
+                </li>
+                <li>
+                <p><i>4/21/2017:</i> Implemented feature to exclude all non-MIT email addresses (i.e. Gmail, Yahoo, etc.) from a mailing list. Just add '.mitonly' right before the '@' sign in the email address.</p> 
+                </li>
+                <li>
+                <p><i>3/15/2015:</i> Switched to the Webathena interface to more safely allow
+                administrators of hidden lists to send list members to SIMPLE.</p>
+                </li>
+                <li>
+                <p><i>3/6/2015:</i> Implemented a more lenient email parser to fix several common
+                mistakes when sending to SIMPLE email addresses.</p>
+                </li>
+                <li>
+                <p><i>3/2/2015:</i> Fixed a bug where SIMPLE corrupts unicode-encoded emails.</p>
+                </li>
+                <li>
+                <p><i>1/17/2014:</i> We have added a user-friendly error when the MIT directory
+                is unavailable.</p>
+                </li>
+                <li>
+                <p><i>11/6/2014:</i> Added a script to allow administrators of hidden lists to send
+                their list members to SIMPLE, thereby allowing SIMPLE to send to these lists.</p>
+                </li>
+                <span id="morefixes" style="display: none;">
+                    <li>
+                    <p><i>12/17/2013:</i> Fixed a bug when sending to @ATHENA.MIT.EDU emails.</p>
+                    </li>
+                    <li>
+                    <p><i>12/15/2013:</i> SIMPLE does not support mailman lists, but sometimes when users
+                    use a mailman list, an uninformative error about empty intersections shows up. We have
+                    fixed this error message to clarify that the error is the usage of the mailman list.</p>
+                    </li>
+                    <li>
+                    <p><i>12/14/2013:</i> We discovered a bug where on days that SIMPLE is
+                    being used too much, some emails are not sent. We have fixed this problem.</p>
+                    </li>
+                    <li>
+                    <p><i>11/29/2013:</i> We have increased the recipient limit (maximum number of recipients
+                    each email can be sent to) to 2000, to accomodate large lists like ec-discuss.</p>
+                    </li>
+                    <li>
+                    <p><i>11/15/2013:</i> We have added more detail to the dryrun results email, such as some
+                    example emails that your message will be sent to or not be sent to.</p>
+                    </li>
+                    <li>
+                    <p><i>11/14/2013:</i> For fun, we have implemented the xor function
+                    <i>for braces notation only</i>, so you can now send to <addr>{list1}^{list2}@simple.mit.edu</addr>.</p>
+                    </li>
+                    <li>
+                    <p><i>11/14/2013:</i> We have added nested expressions; see the paragraph in
+                    "Syntax Details" for more information.</p>
+                    </li>
+                </span>
+            </ul>
+            <div id="morefixesbtn" class="btn" onclick="moreFixes();">More</div>
+
+            <hr>
+
+            <h3>Disclaimer</h3>
+
+            <p>SIMPLE is <b>not</b> responsible for any emails that are not received by intended
+            recipients or any emails that are received by unintended recipients.</p>
+
+            <h6>Last edited by runpeng on Apr. 27, 2017.</h6>
+        </div>
+        <script>
+            function moreFixes() {
+                document.getElementById('morefixes').style.display = 'block';
+                document.getElementById('morefixesbtn').style.display = 'none';
+            }
+        </script>
+    </body>
+</html>

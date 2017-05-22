@@ -1,0 +1,95 @@
+@font-face {
+    font-family: MuseoSans;
+    font-style: normal;
+    font-weight: 400;
+    src: url('museosans.woff') format('woff');
+}
+
+@font-face {
+    font-family: Balthazar;
+    font-style: normal;
+    font-weight: 400;
+    src: url('balthazar.woff') format('woff');
+}
+
+body {
+    padding: 10px;
+    font-family: MuseoSans;
+    font-size: 17px;
+    color: #444;
+    background-color: #f9f9f9;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    text-align: center;
+}
+
+h1 {
+    font-size: 40px;
+}
+
+h3 {
+    font-size: 20px;
+}
+
+h4 {
+    margin-bottom: 30px;
+}
+
+hr {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.info {
+    width: 650px;
+    margin: 0 auto;
+    padding: 50px;
+    background-color: white;
+    -webkit-box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+addr {
+    font-family: Balthazar;
+}
+
+table {
+    margin: 30 auto;
+    padding: 10px;
+    position: relative;
+    width: 1150px;
+    left: -250px;
+    background: white;
+    border: 1px solid #dddddd;
+    -webkit-box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+th, td {
+    padding: 7px;
+    font-size: 16px;
+}
+
+.btn {
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    border-radius: 28px;
+    -webkit-box-shadow: 0px 1px 3px #666666;
+    -moz-box-shadow: 0px 1px 3px #666666;
+    box-shadow: 0px 1px 3px #666666;
+    color: #000000;
+    font-size: 18px;
+    background: #f9f9f9;
+    padding: 5px 15px 5px 15px;
+    text-decoration: none;
+    width: 40px;
+    margin: 0 auto;
+}
+
+.btn:hover {
+    background: #d0d0d0;
+    text-decoration: none;
+    cursor: pointer;
+    cursor: hand;
+}
