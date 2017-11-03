@@ -163,7 +163,8 @@ class SendlistServer(threading.Thread):
         server_config = {
                 'server.socket_host' : IP_ADDRESS,
                 'server.socket_port' : SENDLIST_PORT,
-
+		
+		# If you haven't set up SSL certs, don't bother running the sendlist server.
                 'server.ssl_module' : 'pyopenssl',
                 'server.ssl_certificate' : 'sendlist/cert.pem',
                 'server.ssl_private_key' : 'sendlist/key.pem',

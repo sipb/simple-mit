@@ -95,7 +95,8 @@ class Enumerator:
 
         warnings = []
         if not emails:  # no results; probably private
-            warnings.append(('PRIVATE', group))
+            return {'error': Messages.PRIVATE_GROUP_ERROR_FATAL % group} # we can't deal with hidden lists rn
+            # warnings.append(('PRIVATE', group))
 
         return {'result': emails, 'warnings': warnings}
     

@@ -14,7 +14,7 @@ from Screener import Screener
 from Processor import Processor
 from SendlistServer import SendlistServer
 
-IP_ADDRESS = '18.242.4.222'
+IP_ADDRESS = '18.181.1.186'
 #IP_ADDRESS = '0.0.0.0'
 SMTP_PORT = 25
 
@@ -68,14 +68,14 @@ if __name__ == '__main__':
     # Start new thread for the SMTP server.
     screener.start()
     processor.start()
-    sendlist_server.start()
+    #sendlist_server.start() without SSL certs set up, webathena ain't gonna work
     import asyncore
     thread.start_new_thread(asyncore.loop, ())
 
     # Convenience commands to be run in the "terminal"
     def stop():
         GLOBAL_ENV['stopped'] = True
-        sendlist_server.stop()
+        #sendlist_server.stop()
 
     # Start "terminal" to enter any command
     while not GLOBAL_ENV['stopped']:
