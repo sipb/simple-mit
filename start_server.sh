@@ -3,18 +3,6 @@
 # Start the SIMPLE Server.
 # Requires root permissions.
 
-
-HOSTNAME_FILE="/etc/hostname"
-HOSTS_FILE="/etc/hosts"
-RESOLV_FILE="/etc/resolv.conf"
-
-NAME="simple"
-DOMAIN="$NAME.mit.edu"
-IP="18.242.4.222"
-DNS1="18.70.0.160"
-DNS2="18.71.0.151"
-DNS3="18.72.0.3"
-
 BLANCHE="./blanche"
 BLANCHE_LIB1="/usr/lib/libmrclient.so.0"
 BLANCHE_LIB2="/usr/lib/libmoira.so.0"
@@ -26,8 +14,9 @@ POSTFIX_RESOLV_FILE="/var/spool/postfix/etc/resolv.conf"
 
 SPACES="[[:space:]][[:space:]]*"
 
-ADMIN_EMAIL_REDIRECT="rliu42"
-
+DOMAIN=`hostname -f`
+NOTIFY_TO_ADDR="easy@mit.edu"
+NOTIFY_FROM_ADDR="admin@$DOMAIN"
 
 # Check that we are using sudo.
 if [ $(whoami) != "root" ]
@@ -38,39 +27,7 @@ fi
 
 
 # Check static IP setup.
-echo "Checking that the static IP is set up correctly..."
-
-if [ -e $HOSTNAME_FILE ]
-then
-    if [ $(cat $HOSTNAME_FILE) != "$DOMAIN" ]
-    then
-        echo "Error: incorrect contents in $HOSTNAME_FILE; backup the file, delete, and rerun this script."
-        exit 1
-    fi
-else
-    echo "Writing to $HOSTNAME_FILE..."
-    echo "$DOMAIN" > $HOSTNAME_FILE
-fi
-echo "$HOSTNAME_FILE successfully set up."
-
-if ! grep -q "^127\.0\.0\.1"$SPACES"localhost$" $HOSTS_FILE \
-    || ! grep -q "^${IP/./\\.}$SPACES${DOMAIN/./\\.}$SPACES$NAME$" $HOSTS_FILE
-then
-    echo "Writing to $HOSTS_FILE..."
-    # Append the two lines to the beginning of $HOSTS_FILE
-    echo -e "127.0.0.1 localhost\\n$IP $DOMAIN_NAME" | cat - $HOSTS_FILE > temp && mv temp $HOSTS_FILE
-fi
-echo "$HOSTS_FILE successfully set up."
-
-if ! grep -q "^nameserver$SPACES${DNS1/./\\.}$" $RESOLV_FILE \
-    || ! grep -q "^nameserver$SPACES${DNS2/./\\.}$" $RESOLV_FILE \
-    || ! grep -q "^nameserver$SPACES${DNS3/./\\.}$" $RESOLV_FILE
-then
-    echo "Writing to $RESOLV_FILE..."
-    echo -e "nameserver $DNS1\\nnameserver $DNS2\\nnameserver $DNS3" > $RESOLV_FILE
-fi
-echo "$RESOLV_FILE successfully set up."
-
+echo "NOT checking that domain and static IP are configured correctly. Check that on your own."
 
 # Checking blanche.
 echo "Checking that blanche is set up correctly..."
@@ -140,13 +97,13 @@ then
 fi
 if [ ! -e sendlist/key.pem ]
 then
-    echo "Error: key.pem not found."
-    exit 1
+    echo "Warning: key.pem not found."
+#    exit 1
 fi
 if [ ! -e sendlist/cert.pem ]
 then
-    echo "Error: cert.pem not found."
-    exit 1
+    echo "Warning: cert.pem not found."
+#    exit 1
 fi
 
 
@@ -160,10 +117,10 @@ fi
 
 # Start the Server python script!
 echo "Starting server..."
-echo -e "From: admin@$DOMAIN\\nTo: $ADMIN_EMAIL_REDIRECT@mit.edu\\nSubject: The server at $DOMAIN has started\\nThis is an automatic notification that the server has been started.\\n." | sendmail $ADMIN_EMAIL_REDIRECT"@mit.edu"
+echo -e "From: $NOTIFY_FROM_ADDR\\nTo: $NOTIFY_TO_ADDR\\nSubject: The server at $DOMAIN has started\\nThis is an automatic notification that the server has been started.\\n." | sendmail $NOTIFY_TO_ADDR
 python Server.py
 
 
 # Is called when the Server dies.
-echo -e "From: admin@$DOMAIN\\nTo: $ADMIN_EMAIL_REDIRECT@mit.edu\\nSubject: The server at $DOMAIN has ended\\nThis may be due either to someone manually stopping the server, or to the server abruptly crashing.\\n." | sendmail $ADMIN_EMAIL_REDIRECT"@mit.edu"
+echo -e "From: $NOTIFY_FROM_ADDR\\nTo: $NOTIFY_TO_ADDR\\nSubject: The server at $DOMAIN has ended\\nThis may be due either to someone manually stopping the server, or to the server abruptly crashing.\\n." | sendmail $NOTIFY_TO_ADDR
 

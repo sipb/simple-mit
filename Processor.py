@@ -7,10 +7,7 @@ Processes each verified message that arrives to SIMPLE.
 import copy, os, random, re, string, threading, time
 import Messages
 
-DOMAIN = 'simple.xvm.mit.edu'
-ADMIN_EMAIL = 'admin@' + DOMAIN
-ADMIN_EMAIL_REDIRECT = 'easy@mit.edu'
-ROOT_EMAIL = 'root@' + DOMAIN
+from Config import ADMIN_EMAIL, WEB_DOMAIN
 
 DRYRUN_EXTENSION = '.dryrun'
 MITONLY_EXTENSION = '.mitonly'
@@ -167,7 +164,7 @@ class Processor(threading.Thread):
             'message_id': message['_id'],
         })
 
-        return 'https://' + DOMAIN + ':8103?key=' + key
+        return 'https://' + WEB_DOMAIN + ':8103?key=' + key
 
 
     # Convenience functions for sending different types of emails

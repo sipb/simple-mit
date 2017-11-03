@@ -7,8 +7,7 @@ Sends the message to the specified recipients.
 import email, subprocess
 import Messages
 
-MAX_NUM_RCPTS = 2000
-LOG_ACCOUNT = 'simplemit@gmail.com'  # store emails for logging purposes
+from Config import MAX_NUM_RCPTS, LOG_ACCOUNT
 
 FOOTER_AD = """\n\nThis email was sent using SIMPLE. Please visit simple.mit.edu/emails for
 additional information, or contact admin@simple.mit.edu for

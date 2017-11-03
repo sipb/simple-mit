@@ -15,7 +15,7 @@ NOTE: the link uses the Webathena interface to securely
 ask for your kerberos password. Your password will NOT be
 sent to SIMPLE or any other external machines."""
 
-PRIVATE_GROUP_ERROR_FATAL = """Error: %s is a hidden list, whose members SIMPLE is unable to access.
+PRIVATE_GROUP_ERROR_FATAL = """%s is a hidden list, whose members SIMPLE is unable to access.
 Using SIMPLE with hidden lists is a feature under maintenance, sorry :/"""
 
 FINGER_ERROR = """Error: the MIT directory is temporarily down. Please try sending your email =

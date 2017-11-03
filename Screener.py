@@ -6,15 +6,8 @@ Verifies messages that arrive to SIMPLE.
 
 import os, threading, time
 
-LOG_ACCOUNT = 'simplemit@gmail.com'  # store emails for logging purposes
-SPAM_ACCOUNT = 'simplemit.spam@gmail.com' # store emails that are blocked / spam
-ROOT_EMAIL = 'root@simple.mit.edu'
-
-# Min seconds between emails from the same IP
-IP_MIN_BUFFER_TIME = 30
-
-DOMAIN_BLACKLIST = 'data/domain-blacklist.txt'
-ADDRESS_BLACKLIST = 'data/address-blacklist.txt'
+from Config import ROOT_EMAIL, SPAM_ACCOUNT, LOG_ACCOUNT
+from Config import IP_MIN_BUFFER_TIME, DOMAIN_BLACKLIST, ADDRESS_BLACKLIST
 
 class Screener(threading.Thread):
 

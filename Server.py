@@ -13,12 +13,7 @@ from Parser import Parser
 from Screener import Screener
 from Processor import Processor
 from SendlistServer import SendlistServer
-
-IP_ADDRESS = '18.181.1.186'
-#IP_ADDRESS = '0.0.0.0'
-SMTP_PORT = 25
-
-LOG_FILE = 'data/processor.log'
+from Config import IP_ADDRESS, SMTP_PORT, LOG_FILE
 
 GLOBAL_ENV = {
         'stopped': False,
